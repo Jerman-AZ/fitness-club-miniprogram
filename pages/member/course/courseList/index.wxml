@@ -1,0 +1,81 @@
+<!--pages/member/course/courseList.wxml-->
+<view class="course-list-page">
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <picker 
+      mode="selector" 
+      range="{{courseTypes}}" 
+      value="{{typeIndex}}"
+      bindchange="handleTypeChange"
+    >
+      <view class="filter-item">
+        <text>{{courseTypes[typeIndex]}}</text>
+        <image src="/images/common/arrow-down.png" mode="widthFix"></image>
+      </view>
+    </picker>
+    
+    <picker 
+      mode="date" 
+      start="{{today}}" 
+      end="{{maxDate}}"
+      bindchange="handleDateChange"
+      value="{{selectedDate}}"
+    >
+      <view class="filter-item">
+        <text>{{selectedDate || '选择日期'}}</text>
+        <image src="/images/common/arrow-down.png" mode="widthFix"></image>
+      </view>
+    </picker>
+    
+    <view class="search-box">
+      <input 
+        type="text" 
+        placeholder="搜索课程或教练" 
+        value="{{searchKey}}"
+        bindinput="handleSearchInput"
+        bindconfirm="handleSearch"
+      ></input>
+      <button bindtap="handleSearch" class="search-btn">
+        <image src="/images/common/search.png" mode="widthFix"></image>
+      </button>
+    </view>
+  </view>
+
+  <!-- 课程列表 -->
+  <view class="course-container">
+    <view class="course-date" wx:if="{{groupedCourses.length > 0}}">
+      {{selectedDate || '今日'}}课程
+    </view>
+    
+    <view class="course-list" wx:for="{{groupedCourses}}" wx:key="timeSlot">
+      <text class="time-slot">{{item.timeSlot}}</text>
+      
+      <navigator 
+        url="/pages/member/course/courseDetail?scheduleId={{course.scheduleId}}"
+        class="course-card"
+        wx:for="{{item.courses}}"
+        wx:for-item="course"
+        wx:key="scheduleId"
+      >
+        <image class="course-img" src="{{course.imgUrl}}" mode="widthFix"></image>
+        <view class="course-detail">
+          <text class="course-name">{{course.name}}</text>
+          <text class="course-coach">教练：{{course.coachName}}</text>
+          <view class="course-info">
+            <text class="course-venue">场地：{{course.venueName}}</text>
+            <text class="course-price">¥{{course.price}}</text>
+          </view>
+          <view class="course-status">
+            <text class="quota">剩余{{course.remainingQuota}}个名额</text>
+            <text class="level-tag {{course.level}}">{{course.levelText}}</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    
+    <view class="empty" wx:if="{{groupedCourses.length === 0}}">
+      <image src="/images/common/empty.png" mode="widthFix"></image>
+      <text>暂无符合条件的课程</text>
+    </view>
+  </view>
+</view>

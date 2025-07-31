@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/admin/dashboard/index",
+    "pages/admin/userManage/roleList/index",
+    "pages/admin/userManage/memberList/index",
+    "pages/admin/userManage/coachList/index",
+    "pages/admin/courseManage/courseList/index",
+    "pages/admin/courseManage/schedule/index",
+    "pages/admin/courseManage/venueList/index",
+    "pages/admin/finance/revenue/index",
+    "pages/admin/finance/commission/index",
+    "pages/admin/system/baseInfo/index",
+    "pages/admin/system/notice/index",
+    "pages/member/home/index",
+    "pages/member/training/dataTrack/index",
+    "pages/member/training/planExecute/index",
+    "pages/member/course/courseList/index",
+    "pages/member/personal/info/index",
+    "pages/coach/home/index",
+    "pages/coach/courses/signManage"
+  ],
+  "window": {
+    "navigationBarTitleText": "***健身俱乐部",
+    "navigationBarBackgroundColor": "#1677ff",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#1677ff",
+    "list": [
+      {
+        "pagePath": "pages/member/home/index",
+        "text": "首页",
+        "iconPath": "/images/common/home.png",
+        "selectedIconPath": "/images/common/home-selected.png"
+      },
+      {
+        "pagePath": "pages/member/course/courseList/index",
+        "text": "课程",
+        "iconPath": "/images/common/course.png",
+        "selectedIconPath": "/images/common/course-selected.png"
+      },
+      {
+        "pagePath": "pages/member/training/dataTrack/index",
+        "text": "记录",
+        "iconPath": "/images/common/training.png",
+        "selectedIconPath": "/images/common/training-selected.png"
+      },
+      {
+        "pagePath": "pages/member/personal/info/index",
+        "text": "我的",
+        "iconPath": "/images/common/user.png",
+        "selectedIconPath": "/images/common/user-selected.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要获取您的位置信息用于场地导航"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

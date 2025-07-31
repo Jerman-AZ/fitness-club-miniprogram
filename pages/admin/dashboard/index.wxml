@@ -1,0 +1,92 @@
+<!--pages/admin/dashboard/index.wxml-->
+<view class="admin-dashboard">
+  <!-- 数据概览 -->
+  <view class="data-overview">
+    <view class="data-card">
+      <text class="data-title">新增会员</text>
+      <text class="data-value">{{overview.newMembers}}</text>
+      <text class="data-change {{overview.memberChange >= 0 ? 'up' : 'down'}}">
+        {{overview.memberChange >= 0 ? '+' : ''}}{{overview.memberChange}}%
+      </text>
+    </view>
+    <view class="data-card">
+      <text class="data-title">课程预约</text>
+      <text class="data-value">{{overview.courseBookings}}</text>
+      <text class="data-change {{overview.bookingChange >= 0 ? 'up' : 'down'}}">
+        {{overview.bookingChange >= 0 ? '+' : ''}}{{overview.bookingChange}}%
+      </text>
+    </view>
+    <view class="data-card">
+      <text class="data-title">今日营收</text>
+      <text class="data-value">¥{{overview.todayRevenue}}</text>
+      <text class="data-change {{overview.revenueChange >= 0 ? 'up' : 'down'}}">
+        {{overview.revenueChange >= 0 ? '+' : ''}}{{overview.revenueChange}}%
+      </text>
+    </view>
+  </view>
+
+  <!-- 待办事项 -->
+  <view class="todo-section">
+    <view class="section-header">
+      <text class="section-title">待办事项</text>
+      <text class="todo-count">{{todoList.length}}</text>
+    </view>
+    <view class="todo-list">
+      <view class="todo-item" wx:for="{{todoList}}" wx:key="id">
+        <view class="todo-content">
+          <text class="todo-title">{{item.title}}</text>
+          <text class="todo-time">{{item.time}}</text>
+        </view>
+        <button 
+          class="handle-btn" 
+          bindtap="handleTodo" 
+          data-id="{{item.id}}"
+        >
+          处理
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近数据趋势 -->
+  <view class="trend-section">
+    <view class="section-header">
+      <text class="section-title">营收趋势（近7天）</text>
+      <picker 
+        mode="selector" 
+        range="{{trendTypes}}" 
+        value="{{trendTypeIndex}}"
+        bindchange="changeTrendType"
+      >
+        <text class="trend-type">{{trendTypes[trendTypeIndex]}}</text>
+      </picker>
+    </view>
+    <view class="chart-container">
+      <canvas 
+        type="2d" 
+        canvas-id="trendChart" 
+        class="trend-chart"
+      ></canvas>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="navToUserManage">
+      <image src="/images/admin/user-manage.png" mode="widthFix"></image>
+      <text>用户管理</text>
+    </view>
+    <view class="action-item" bindtap="navToCourseManage">
+      <image src="/images/admin/course-manage.png" mode="widthFix"></image>
+      <text>课程管理</text>
+    </view>
+    <view class="action-item" bindtap="navToFinance">
+      <image src="/images/admin/finance.png" mode="widthFix"></image>
+      <text>财务管理</text>
+    </view>
+    <view class="action-item" bindtap="navToSystem">
+      <image src="/images/admin/system.png" mode="widthFix"></image>
+      <text>系统设置</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,195 @@
+/* pages/member/course/courseList.wxss */
+.course-list-page {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  padding: 10rpx 20rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 20rpx;
+  margin-right: 15rpx;
+  margin-bottom: 10rpx;
+}
+
+.filter-item text {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 5rpx;
+}
+
+.filter-item image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.search-box {
+  display: flex;
+  flex: 1;
+  min-width: 300rpx;
+  margin-bottom: 10rpx;
+}
+
+.search-box input {
+  flex: 1;
+  height: 60rpx;
+  background-color: #f5f5f5;
+  border-radius: 30rpx 0 0 30rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  width: 70rpx;
+  height: 60rpx;
+  background-color: #1677ff;
+  border-radius: 0 30rpx 30rpx 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* 课程列表 */
+.course-container {
+  padding: 20rpx;
+}
+
+.course-date {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+  padding-left: 10rpx;
+  border-left: 4rpx solid #1677ff;
+}
+
+.time-slot {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin: 20rpx 0 10rpx;
+  padding-left: 10rpx;
+}
+
+.course-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 15rpx;
+  margin-bottom: 15rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.course-img {
+  width: 140rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+}
+
+.course-detail {
+  flex: 1;
+  margin-left: 15rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-coach {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.course-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-venue {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.course-price {
+  font-size: 26rpx;
+  color: #ff5722;
+  font-weight: bold;
+}
+
+.course-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quota {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.level-tag {
+  padding: 2rpx 10rpx;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+}
+
+.level-tag.beginner {
+  background-color: #e6f7ee;
+  color: #00a854;
+}
+
+.level-tag.intermediate {
+  background-color: #fff7e6;
+  color: #ff7d00;
+}
+
+.level-tag.advanced {
+  background-color: #fee;
+  color: #f5222d;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty image {
+  width: 150rpx;
+  height: 150rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
+}
+
+.empty text {
+  font-size: 28rpx;
+  color: #999;
+}

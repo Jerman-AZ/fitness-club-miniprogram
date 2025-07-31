@@ -1,0 +1,112 @@
+<!--pages/coach/courses/signManage.wxml-->
+<view class="sign-manage">
+  <!-- 课程信息 -->
+  <view class="course-info">
+    <text class="course-name">{{courseInfo.name}}</text>
+    <view class="course-time-venue">
+      <text class="time">{{courseInfo.date}} {{courseInfo.startTime}}-{{courseInfo.endTime}}</text>
+      <text class="venue">场地：{{courseInfo.venueName}}</text>
+    </view>
+    <view class="quota-info">
+      <text>总名额：{{courseInfo.quota}}</text>
+      <text>已预约：{{courseInfo.bookedCount}}</text>
+      <text>已签到：{{signStats.preSigned}}/{{signStats.total}}</text>
+    </view>
+  </view>
+
+  <!-- 签到二维码 -->
+  <view class="qr-code-section">
+    <view class="qr-code-container">
+      <image 
+        class="qr-code" 
+        src="{{qrcodeUrl}}" 
+        mode="widthFix"
+        binderror="refreshQRCode"
+      ></image>
+      <text class="qr-tip">学员扫码完成签到</text>
+    </view>
+    
+    <view class="sign-time">
+      <view class="time-item">
+        <text class="time-label">课前签到时段：</text>
+        <text class="time-value">{{validTime.preStart}} - {{validTime.preEnd}}</text>
+      </view>
+      <view class="time-item">
+        <text class="time-label">课后签到时段：</text>
+        <text class="time-value">{{validTime.postStart}} - {{validTime.postEnd}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 签到状态统计 -->
+  <view class="sign-stats">
+    <view class="stat-item">
+      <text class="stat-value">{{signStats.preSigned}}</text>
+      <text class="stat-label">已完成课前签到</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{signStats.postSigned}}</text>
+      <text class="stat-label">已完成课后签到</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{signStats.bothSigned}}</text>
+      <text class="stat-label">已完成两次签到</text>
+    </view>
+  </view>
+
+  <!-- 签到记录列表 -->
+  <view class="sign-records">
+    <view class="records-header">
+      <text class="records-title">学员签到记录</text>
+      <picker 
+        mode="selector" 
+        range="{{statusOptions}}" 
+        value="{{statusIndex}}"
+        bindchange="handleStatusChange"
+      >
+        <view class="filter-btn">
+          {{statusOptions[statusIndex]}}
+          <image src="/images/common/arrow-down.png" mode="widthFix"></image>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="records-list">
+      <view class="record-item" wx:for="{{signRecords}}" wx:key="memberId">
+        <view class="member-info">
+          <image 
+            class="member-avatar" 
+            src="{{item.avatar || '/images/common/default-avatar.png'}}" 
+            mode="widthFix"
+          ></image>
+          <view class="member-detail">
+            <text class="member-name">{{item.name}}</text>
+            <text class="member-phone">{{item.phone}}</text>
+          </view>
+        </view>
+        
+        <view class="sign-status">
+          <view class="status-tag {{item.status === 'both' ? 'status-success' : (item.status === 'pre_only' ? 'status-partial' : 'status-fail')}}">
+            {{statusTextMap[item.status]}}
+          </view>
+          
+          <view class="sign-time-detail" wx:if="{{item.status !== 'none'}}">
+            <text wx:if="{{item.preSignTime}}">课前：{{item.preSignTime}}</text>
+            <text wx:if="{{item.postSignTime}}">课后：{{item.postSignTime}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="empty" wx:if="{{signRecords.length === 0}}">
+        <image src="/images/common/empty.png" mode="widthFix"></image>
+        <text>暂无签到记录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 刷新按钮 -->
+  <button class="refresh-btn" bindtap="refreshSignData">
+    <image src="/images/common/refresh.png" mode="widthFix"></image>
+    刷新签到数据
+  </button>
+</view>

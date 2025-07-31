@@ -1,0 +1,97 @@
+<view class="member-home">
+  <!-- 顶部用户信息 -->
+  <view class="user-info">
+    <image 
+      class="avatar" 
+      src="{{userInfo.avatar || '/images/common/default-avatar.png'}}"
+      mode="widthFix"
+    ></image>
+    <view class="user-detail">
+      <view class="user-name-role">
+        <text class="user-name">{{userInfo.name || '匿名用户'}}</text>
+        <text class="user-level">{{userInfo.level || '普通会员'}}</text>
+      </view>
+      <view class="user-assets">
+        <view class="asset-item">
+          <text class="asset-value">{{userInfo.points || 0}}</text>
+          <text class="asset-name">积分</text>
+        </view>
+        <view class="asset-item">
+          <text class="asset-value">¥{{userInfo.balance || 0}}</text>
+          <text class="asset-name">余额</text>
+        </view>
+      </view>
+    </view>
+    <navigator url="/pages/member/personal/info" class="edit-btn">
+      <image src="/images/common/edit.png" mode="widthFix"></image>
+    </navigator>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-entrance">
+    <navigator url="/pages/member/course/courseList" class="entrance-item">
+      <image src="/images/member/course.png" mode="widthFix"></image>
+      <text>课程预约</text>
+    </navigator>
+    <navigator url="/pages/member/course/myCourse" class="entrance-item">
+      <image src="/images/member/my-course.png" mode="widthFix"></image>
+      <text>我的课程</text>
+    </navigator>
+    <navigator url="/pages/member/points/index" class="entrance-item">
+      <image src="/images/member/points.png" mode="widthFix"></image>
+      <text>积分商城</text>
+    </navigator>
+    <navigator url="/pages/member/training/dataTrack/index" class="entrance-item">
+      <image src="/images/member/training.png" mode="widthFix"></image>
+      <text>训练数据</text>
+    </navigator>
+  </view>
+
+  <!-- 推荐课程 -->
+  <view class="recommend-section">
+    <view class="section-header">
+      <text class="section-title">为你推荐</text>
+      <navigator url="/pages/member/course/courseList" class="more-btn">更多</navigator>
+    </view>
+    
+    <view class="course-list">
+      <navigator 
+        url="/pages/member/course/courseDetail?scheduleId={{course.scheduleId}}" 
+        class="course-item"
+        wx:for="{{recommendCourses}}"
+        wx:key="scheduleId"
+      >
+        <image class="course-img" src="{{course.imgUrl}}" mode="widthFix"></image>
+        <view class="course-info">
+          <text class="course-name">{{course.name}}</text>
+          <text class="course-coach">教练：{{course.coachName}}</text>
+          <view class="course-time-price">
+            <text class="course-time">{{course.date}} {{course.time}}</text>
+            <text class="course-price">¥{{course.price}}</text>
+          </view>
+          <view class="course-status">
+            <text class="remaining-quota">剩余{{course.remainingQuota}}个名额</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 活动公告 -->
+  <view class="activity-section">
+    <view class="section-header">
+      <text class="section-title">活动公告</text>
+    </view>
+    <view class="activity-list">
+      <navigator 
+        url="/pages/member/activity/detail?id={{activity.id}}" 
+        class="activity-item"
+        wx:for="{{activities}}"
+        wx:key="id"
+      >
+        <text class="activity-title">{{activity.title}}</text>
+        <text class="activity-time">{{activity.startTime}}-{{activity.endTime}}</text>
+      </navigator>
+    </view>
+  </view>
+</view>

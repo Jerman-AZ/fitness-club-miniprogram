@@ -1,0 +1,95 @@
+<!--pages/member/personal/info/index.wxml-->
+<view class="personal-info">
+  <!-- 头像与基本信息 -->
+  <view class="avatar-section">
+    <view class="avatar-container">
+      <image 
+        class="avatar" 
+        src="{{userInfo.avatar || '/images/common/default-avatar.png'}}" 
+        mode="widthFix"
+      ></image>
+      <button class="change-avatar" bindtap="chooseAvatar">更换头像</button>
+    </view>
+    
+    <view class="basic-info">
+      <view class="info-item">
+        <text class="info-label">会员姓名</text>
+        <input 
+          class="info-value" 
+          value="{{userInfo.name || ''}}" 
+          placeholder="请输入姓名"
+          bindinput="updateName"
+        ></input>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">手机号码</text>
+        <text class="info-value">{{userInfo.phone || ''}}</text>
+        <button class="edit-btn" bindtap="goToChangePhone">修改</button>
+      </view>
+      
+      <view class="info-item">
+        <text class="info-label">会员等级</text>
+        <text class="info-value level {{userInfo.levelClass}}">{{userInfo.level || '普通会员'}}</text>
+        <text class="level-progress">
+          距离升级：{{userInfo.upgradeProgress || 0}}%
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 详细信息 -->
+  <view class="detail-info">
+    <view class="info-item">
+      <text class="info-label">性别</text>
+      <radio-group bindchange="updateGender" value="{{userInfo.gender || ''}}">
+        <label class="gender-option">
+          <radio value="male" />男
+        </label>
+        <label class="gender-option">
+          <radio value="female" />女
+        </label>
+      </radio-group>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">出生日期</text>
+      <picker 
+        mode="date" 
+        value="{{userInfo.birthday || ''}}"
+        start="1970-01-01"
+        end="{{today}}"
+        bindchange="updateBirthday"
+      >
+        <text class="info-value">{{userInfo.birthday || '请选择出生日期'}}</text>
+      </picker>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">紧急联系人</text>
+      <input 
+        class="info-value" 
+        value="{{userInfo.emergencyContact || ''}}" 
+        placeholder="请输入紧急联系人姓名"
+        bindinput="updateEmergencyContact"
+      ></input>
+    </view>
+    
+    <view class="info-item">
+      <text class="info-label">联系电话</text>
+      <input 
+        class="info-value" 
+        value="{{userInfo.emergencyPhone || ''}}" 
+        placeholder="请输入紧急联系人电话"
+        type="number"
+        bindinput="updateEmergencyPhone"
+      ></input>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="btn-section">
+    <button class="save-btn" bindtap="saveInfo">保存信息</button>
+    <button class="logout-btn" bindtap="confirmLogout">退出登录</button>
+  </view>
+</view>
