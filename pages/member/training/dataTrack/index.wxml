@@ -1,2 +1,84 @@
-<!--pages/member/training/dataTrack.wxml-->
-<text>pages/member/training/dataTrack/index.wxml</text>
+<!--pages/member/training/dataTrack/index.wxml-->
+<view class="training-data-page">
+  <!-- 数据概览 -->
+  <view class="data-overview">
+    <view class="overview-item" bindtap="goToTrainingPlan">
+      <text class="item-title">开始训练</text>
+      <text class="item-value">进入计划</text>
+      <image src="/images/common/arrow-right.png" class="arrow-icon"></image>
+    </view>
+    <view class="overview-item">
+      <text class="item-title">累计训练时长</text>
+      <text class="item-value">{{totalTrainingTime}}</text>
+    </view>
+    <view class="overview-item">
+      <text class="item-title">本周训练</text>
+      <text class="item-value">{{weeklyReport}}</text>
+    </view>
+  </view>
+
+  <!-- 体重和体脂曲线 -->
+  <view class="chart-section">
+    <view class="section-header">
+      <text class="section-title">体重变化 (近30天)</text>
+    </view>
+    <view class="chart-container">
+      <canvas type="2d" canvas-id="weightChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <view class="chart-section">
+    <view class="section-header">
+      <text class="section-title">体脂率变化 (近30天)</text>
+    </view>
+    <view class="chart-container">
+      <canvas type="2d" canvas-id="fatChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 运动数据 -->
+  <view class="sport-data">
+    <view class="section-header">
+      <text class="section-title">今日运动数据</text>
+      <button class="bind-btn" bindtap="bindDevice">绑定设备</button>
+    </view>
+    
+    <view class="data-card">
+      <text class="data-label">今日步数</text>
+      <text class="data-value">{{todaySteps}} / {{targetSteps}}</text>
+      <view class="progress-bar">
+        <view class="progress" style="width: {{stepsProgress}}%"></view>
+      </view>
+      <text class="steps-reward">{{todaySteps >= targetSteps ? '已获得5积分' : '完成8000步可获得5积分'}}</text>
+    </view>
+    
+    <view class="data-card">
+      <text class="data-label">运动时长</text>
+      <text class="data-value">{{exerciseDuration}} 分钟</text>
+      <view class="status-tag {{isGoalReached ? 'success' : 'warning'}}">
+        {{isGoalReached ? '今日目标已达成' : '今日目标未达成'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 训练记录 -->
+  <view class="records-section">
+    <view class="section-header">
+      <text class="section-title">近期训练记录</text>
+    </view>
+    
+    <view class="records-list">
+      <view class="record-item" wx:for="{{trainingRecords}}" wx:key="id">
+        <image src="{{item.coverImage}}" class="record-img"></image>
+        <view class="record-info">
+          <text class="record-title">{{item.planName}}</text>
+          <text class="record-date">{{item.date}}</text>
+          <text class="record-duration">时长: {{item.duration}}</text>
+        </view>
+        <view class="record-status {{item.status === 'completed' ? 'completed' : 'pending'}}">
+          {{item.status === 'completed' ? '已完成' : '进行中'}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
